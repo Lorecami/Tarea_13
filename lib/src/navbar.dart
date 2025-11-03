@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:menudrawer/src/inicio.dart';
+import 'package:menudrawer/src/notificacion.dart';
+import 'package:menudrawer/src/perfil.dart';
+import 'package:menudrawer/src/siguiente.dart';
 
 class Navbar extends StatelessWidget {
   const Navbar({super.key});
@@ -9,7 +13,7 @@ class Navbar extends StatelessWidget {
       child: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFF1976D2), Color(0xFF64B5F6)],
+            colors: [Color(0xFFF8BBD0), Color(0xFFFCE4EC)], // degradado rosa pastel
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -17,83 +21,99 @@ class Navbar extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            // Encabezado del Drawer
             UserAccountsDrawerHeader(
-              decoration: const BoxDecoration(
-                color: Colors.transparent,
-              ),
-              currentAccountPicture: const CircleAvatar(
-                backgroundImage: AssetImage('images/hombre.jpg'),
-              ),
               accountName: const Text(
-                'Kevin Nivesela',
-                style: TextStyle(fontWeight: FontWeight.bold),
+                "Camila Vivas",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  color: Colors.white,
+                ),
               ),
-              accountEmail: const Text('ksa.nivesela@yavirac.edu.ec'),
+              accountEmail: const Text(
+                "clg.vivas@yavirac.edu.ec",
+                style: TextStyle(color: Colors.white70),
+              ),
+              currentAccountPicture: Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.pinkAccent.withOpacity(0.3),
+                      blurRadius: 6,
+                      offset: const Offset(2, 3),
+                    ),
+                  ],
+                ),
+                child: const CircleAvatar(
+                  backgroundImage: AssetImage(
+                      "/SRC/flutter/examples/CuartoA/menudrawer/images/mujer.jpg"),
+                ),
+              ),
+              decoration: BoxDecoration(
+                color: const Color.fromARGB(255, 122, 195, 238), // color base
+                image: const DecorationImage(
+                  image: AssetImage(
+                    "/SRC/flutter/examples/CuartoA/menudrawer/images/fondo.2.jpg",
+                  ),
+                  fit: BoxFit.cover,
+                  opacity: 5.10, // suaviza la imagen
+                ),
+                borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(0),
+                  bottomRight: Radius.circular(0),
+                ),
+              ),
             ),
 
-            // Opción: Inicio
+            // Opciones del Drawer
             _buildDrawerItem(
               icon: Icons.home,
               text: 'Inicio',
               onTap: () {
-                Navigator.pushNamedAndRemoveUntil(
-                    context, '/inicio', (route) => false);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const InicioPage()),
+                );
               },
             ),
-
-            // Opción: Perfil
             _buildDrawerItem(
               icon: Icons.person,
               text: 'Perfil',
               onTap: () {
-                Navigator.pushNamed(context, '/perfil');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const PerfilPage()),
+                );
               },
             ),
-
-            // Opción: Notificaciones
             _buildDrawerItem(
               icon: Icons.notifications_active,
               text: 'Notificaciones',
               onTap: () {
-                Navigator.pushNamed(context, '/notificacion');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const NotificacionPage(),
+                  ),
+                );
               },
             ),
-
-            // Opción: Configuración
             _buildDrawerItem(
-              icon: Icons.settings,
-              text: 'Configuración',
-              onTap: () {
-                Navigator.pushNamed(context, '/configuracion');
-              },
-            ),
-
-            //Acerca de
-            _buildDrawerItem(
-              icon: Icons.help_outline,
-              text: 'Acerca de',
-              onTap: () {
-                Navigator.pushNamed(context, '/acerca');
-              },
-            ),
-
-            // Opción: Siguiente (pantalla final)
-            _buildDrawerItem(
-              icon: Icons.arrow_forward_ios,
+              icon: Icons.arrow_forward,
               text: 'Siguiente',
               onTap: () {
-                Navigator.pushNamed(context, '/siguiente');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SiguientePage()),
+                );
               },
             ),
-
             const Divider(
               color: Colors.white70,
               indent: 20,
               endIndent: 20,
             ),
-
-            // Opción final: Salir o Cerrar sesión
             _buildDrawerItem(
               icon: Icons.exit_to_app,
               text: 'Cerrar sesión',
@@ -115,20 +135,23 @@ class Navbar extends StatelessWidget {
     );
   }
 
-  // Método reutilizable para crear cada opción del Drawer
   Widget _buildDrawerItem({
     required IconData icon,
     required String text,
     required VoidCallback onTap,
-    Color color = Colors.white,
+    Color color = const Color(0xFF6D4C41), // tono marrón rosado pastel
   }) {
     return ListTile(
       leading: Icon(icon, color: color),
       title: Text(
         text,
-        style: TextStyle(color: color, fontSize: 16),
+        style: TextStyle(
+          color: color,
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+        ),
       ),
-      hoverColor: Colors.white24,
+      hoverColor: Colors.pink.shade50,
       onTap: onTap,
     );
   }

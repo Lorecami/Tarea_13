@@ -4,76 +4,96 @@ import 'package:menudrawer/src/navbar.dart';
 class InicioPage extends StatelessWidget {
   const InicioPage({super.key});
 
+  // 🎨 Paleta pastel rosa y lila
+  final Color rosaSuave = const Color(0xFFF8BBD0);
+  final Color rosaMedio = const Color(0xFFF48FB1);
+  final Color rosaIntenso = const Color(0xFFE57373);
+  final Color lilaSuave = const Color(0xFFE1BEE7);
+  final Color cremaClaro = const Color(0xFFFFF3F8);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFEDE7F6),
+      backgroundColor: cremaClaro,
       appBar: AppBar(
-        title: const Text('Inicio'),
-        backgroundColor: const Color(0xFF2196F3),
+        title: const Text(
+          'Página Principal',
+          style: TextStyle(
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+          ),
+        ),
+        backgroundColor: rosaMedio,
         elevation: 4,
+        centerTitle: true,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
+        ),
       ),
       drawer: const Navbar(),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // 🔹 Banner superior con gradiente
+            // 🌸 Encabezado con gradiente rosado
             Container(
               height: 220,
               width: double.infinity,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Color(0xFF2196F3), Color(0xFF673AB7)],
+                  colors: [rosaMedio, lilaSuave],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(30),
                   bottomRight: Radius.circular(30),
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black26,
-                    blurRadius: 6,
-                    offset: Offset(0, 4),
-                  )
+                    color: rosaIntenso.withOpacity(0.2),
+                    blurRadius: 10,
+                    offset: const Offset(0, 6),
+                  ),
                 ],
               ),
-              child: Column(
+              child: const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Icon(Icons.flutter_dash, color: Colors.white, size: 90),
-                  SizedBox(height: 10),
+                children: [
+                  Icon(Icons.favorite, color: Colors.white, size: 80),
+                  SizedBox(height: 12),
                   Text(
-                    'Bienvenido, Kevin 👋',
+                    '¡Bienvenida de nuevo 💕!',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
-                      letterSpacing: 0.5,
                     ),
                   ),
                   SizedBox(height: 6),
-                  Text(
-                    'Explora todas las secciones desde el menú lateral y descubre funcionalidades adicionales de la app.',
-                    style: TextStyle(color: Colors.white70, fontSize: 14),
-                    textAlign: TextAlign.center,
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 25.0),
+                    child: Text(
+                      'Explora tus secciones favoritas con estilo y colores suaves 🌷',
+                      style: TextStyle(color: Colors.white70, fontSize: 14),
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ],
               ),
             ),
             const SizedBox(height: 30),
-            // 🔹 Sección de accesos rápidos
+
+            // 💫 Sección de accesos destacados
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 children: [
-                  const Text(
-                    'Accesos Rápidos',
+                  Text(
+                    'Explora tus opciones',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFF3F51B5),
+                      color: rosaIntenso,
                     ),
                   ),
                   const SizedBox(height: 20),
@@ -84,43 +104,43 @@ class InicioPage extends StatelessWidget {
                     children: [
                       _buildCard(
                         context,
-                        icon: Icons.person,
-                        title: 'Perfil',
-                        description: 'Revisa tu información personal, contacto y actualiza tus datos.',
-                        color: Colors.blueAccent,
-                        route: '/perfil',
+                        Icons.person,
+                        'Mi Perfil',
+                        'Consulta o modifica tu información personal.',
+                        rosaSuave,
+                        '/perfil',
                       ),
                       _buildCard(
                         context,
-                        icon: Icons.notifications,
-                        title: 'Notificaciones',
-                        description: 'Consulta las alertas y mensajes recientes de la app.',
-                        color: Colors.orangeAccent,
-                        route: '/notificacion',
+                        Icons.notifications_active,
+                        'Alertas',
+                        'Revisa los avisos más recientes y novedades.',
+                        lilaSuave,
+                        '/notificacion',
                       ),
                       _buildCard(
                         context,
-                        icon: Icons.settings,
-                        title: 'Configuración',
-                        description: 'Ajusta tus preferencias, modo oscuro, sonidos y notificaciones.',
-                        color: Colors.deepPurple,
-                        route: '/configuracion',
+                        Icons.settings,
+                        'Preferencias',
+                        'Configura la app a tu gusto 💅',
+                        rosaMedio,
+                        '/configuracion',
                       ),
                       _buildCard(
                         context,
-                        icon: Icons.help_outline,
-                        title: 'Acerca de',
-                        description: 'Conoce información sobre la app y el desarrollador.',
-                        color: Colors.pinkAccent,
-                        route: '/acerca',
+                        Icons.info_outline,
+                        'Sobre la App',
+                        'Conoce más sobre este proyecto y su creadora.',
+                        rosaSuave,
+                        '/acerca',
                       ),
                       _buildCard(
                         context,
-                        icon: Icons.arrow_forward,
-                        title: 'Siguiente',
-                        description: 'Explora la pantalla final y los mensajes de cierre de la app.',
-                        color: Colors.indigo,
-                        route: '/siguiente',
+                        Icons.arrow_forward_ios,
+                        'Continuar',
+                        'Sigue explorando el contenido.',
+                        lilaSuave,
+                        '/siguiente',
                       ),
                     ],
                   ),
@@ -128,43 +148,56 @@ class InicioPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 50),
-            // 🔹 Botones principales de acción
+
+            // 🌈 Botones principales
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF2196F3),
-                    padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 14),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-                    elevation: 5,
+                Builder(
+                  builder: (context) => ElevatedButton.icon(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: rosaSuave,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 22, vertical: 14),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      elevation: 5,
+                    ),
+                    onPressed: () => Scaffold.of(context).openDrawer(),
+                    icon: const Icon(Icons.menu),
+                    label: const Text('Ver Menú'),
                   ),
-                  onPressed: () => Scaffold.of(context).openDrawer(),
-                  icon: const Icon(Icons.menu),
-                  label: const Text('Abrir Menú'),
                 ),
                 const SizedBox(width: 20),
                 ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.deepPurple,
-                    padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 14),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                    backgroundColor: rosaIntenso,
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 22, vertical: 14),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
                     elevation: 5,
                   ),
                   onPressed: () {
                     Navigator.pushNamed(context, '/perfil');
                   },
                   icon: const Icon(Icons.person),
-                  label: const Text('Ir a Perfil'),
+                  label: const Text('Ir al Perfil'),
                 ),
               ],
             ),
+
             const SizedBox(height: 50),
-            // 🔹 Pie de página
+
+            // 🪷 Pie de página
             Container(
               padding: const EdgeInsets.only(bottom: 30),
               child: const Text(
-                '© 2025 App creada por Kevin Nivesela',
+                '© 2025 Desarrollado con 💻 y ☕ por Camila Vivas',
                 style: TextStyle(
                   color: Colors.grey,
                   fontSize: 13,
@@ -178,15 +211,9 @@ class InicioPage extends StatelessWidget {
     );
   }
 
-  // Tarjeta de acceso rápido con animación
-  Widget _buildCard(
-    BuildContext context, {
-    required IconData icon,
-    required String title,
-    required String description,
-    required Color color,
-    required String route,
-  }) {
+  // 🧩 Tarjetas con estilo pastel
+  Widget _buildCard(BuildContext context, IconData icon, String title,
+      String description, Color color, String route) {
     return GestureDetector(
       onTap: () => Navigator.pushNamed(context, route),
       child: AnimatedContainer(
@@ -195,11 +222,11 @@ class InicioPage extends StatelessWidget {
         height: 150,
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(18),
+          borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
-              blurRadius: 6,
+              color: color.withOpacity(0.25),
+              blurRadius: 8,
               offset: const Offset(0, 4),
             ),
           ],
@@ -213,9 +240,25 @@ class InicioPage extends StatelessWidget {
               child: Icon(icon, color: Colors.white, size: 28),
             ),
             const SizedBox(height: 10),
-            Text(title, style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black87)),
+            Text(
+              title,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+              ),
+            ),
             const SizedBox(height: 4),
-            Text(description, style: const TextStyle(fontSize: 12, color: Colors.black54), textAlign: TextAlign.center),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Text(
+                description,
+                style: const TextStyle(
+                  fontSize: 12,
+                  color: Colors.black54,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
           ],
         ),
       ),
