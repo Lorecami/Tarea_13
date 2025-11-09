@@ -1,262 +1,185 @@
 import 'package:flutter/material.dart';
-import 'package:menudrawer/src/navbar.dart';
+import 'navbar.dart';
 
 class InicioPage extends StatelessWidget {
   const InicioPage({super.key});
 
-  // 🎨 Paleta pastel rosa y lila
-  final Color rosaSuave = const Color(0xFFF8BBD0);
-  final Color rosaMedio = const Color(0xFFF48FB1);
-  final Color rosaIntenso = const Color(0xFFE57373);
-  final Color lilaSuave = const Color(0xFFE1BEE7);
-  final Color cremaClaro = const Color(0xFFFFF3F8);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: cremaClaro,
+      drawer: const Navbar(),
       appBar: AppBar(
-        title: const Text(
-          'Página Principal',
-          style: TextStyle(
-            fontWeight: FontWeight.w600,
-            color: Colors.white,
+        title: const Text('Agenda Médica'),
+        backgroundColor: const Color(0xFF7AC3EE),
+        elevation: 0,
+      ),
+      body: Container(
+        width: double.infinity,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color(0xFFE3F2FD),
+              Color(0xFFFCE4EC),
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
           ),
         ),
-        backgroundColor: rosaMedio,
-        elevation: 4,
-        centerTitle: true,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
-        ),
-      ),
-      drawer: const Navbar(),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            // 🌸 Encabezado con gradiente rosado
-            Container(
-              height: 220,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [rosaMedio, lilaSuave],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(height: 20),
+
+              // 👩‍⚕️ Encabezado
+              const Text(
+                'Bienvenida, Dra. Camila Vivas 💗',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF444444),
                 ),
-                borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(30),
-                  bottomRight: Radius.circular(30),
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: rosaIntenso.withOpacity(0.2),
-                    blurRadius: 10,
-                    offset: const Offset(0, 6),
-                  ),
-                ],
               ),
-              child: const Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+              const SizedBox(height: 10),
+              const Text(
+                'Revisa tus próximas citas y gestiona tus pacientes con facilidad 🩺',
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.grey, fontSize: 16),
+              ),
+
+              const SizedBox(height: 30),
+
+              // 📅 Tarjeta resumen del día
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.pinkAccent.withOpacity(0.1),
+                      blurRadius: 10,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    Text(
+                      'Citas de Hoy',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF7AC3EE),
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    ListTile(
+                      leading: Icon(Icons.schedule, color: Colors.pinkAccent),
+                      title: Text('10:00 AM - Juan Pérez'),
+                      subtitle: Text('Control general'),
+                    ),
+                    ListTile(
+                      leading: Icon(Icons.schedule, color: Colors.pinkAccent),
+                      title: Text('11:30 AM - María López'),
+                      subtitle: Text('Revisión cardiológica'),
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: 30),
+
+              // ⚡ Accesos rápidos
+              const Text(
+                'Accesos Rápidos',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF444444),
+                ),
+              ),
+              const SizedBox(height: 20),
+
+              Wrap(
+                alignment: WrapAlignment.center,
+                spacing: 15,
+                runSpacing: 15,
                 children: [
-                  Icon(Icons.favorite, color: Colors.white, size: 80),
-                  SizedBox(height: 12),
-                  Text(
-                    '¡Bienvenida de nuevo 💕!',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  _buildCard(
+                    icon: Icons.calendar_today,
+                    color: const Color(0xFF7AC3EE),
+                    title: 'Ver Citas',
+                    onTap: () => Navigator.pushNamed(context, '/citas'),
                   ),
-                  SizedBox(height: 6),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 25.0),
-                    child: Text(
-                      'Explora tus secciones favoritas con estilo y colores suaves 🌷',
-                      style: TextStyle(color: Colors.white70, fontSize: 14),
-                      textAlign: TextAlign.center,
-                    ),
+                  _buildCard(
+                    icon: Icons.people,
+                    color: const Color(0xFFF8BBD0),
+                    title: 'Pacientes',
+                    onTap: () => Navigator.pushNamed(context, '/pacientes'),
                   ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 30),
-
-            // 💫 Sección de accesos destacados
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                children: [
-                  Text(
-                    'Explora tus opciones',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: rosaIntenso,
-                    ),
+                  _buildCard(
+                    icon: Icons.person,
+                    color: const Color(0xFFFDD835),
+                    title: 'Perfil Médico',
+                    onTap: () => Navigator.pushNamed(context, '/perfil'),
                   ),
-                  const SizedBox(height: 20),
-                  Wrap(
-                    spacing: 20,
-                    runSpacing: 20,
-                    alignment: WrapAlignment.center,
-                    children: [
-                      _buildCard(
-                        context,
-                        Icons.person,
-                        'Mi Perfil',
-                        'Consulta o modifica tu información personal.',
-                        rosaSuave,
-                        '/perfil',
-                      ),
-                      _buildCard(
-                        context,
-                        Icons.notifications_active,
-                        'Alertas',
-                        'Revisa los avisos más recientes y novedades.',
-                        lilaSuave,
-                        '/notificacion',
-                      ),
-                      _buildCard(
-                        context,
-                        Icons.settings,
-                        'Preferencias',
-                        'Configura la app a tu gusto 💅',
-                        rosaMedio,
-                        '/configuracion',
-                      ),
-                      _buildCard(
-                        context,
-                        Icons.info_outline,
-                        'Sobre la App',
-                        'Conoce más sobre este proyecto y su creadora.',
-                        rosaSuave,
-                        '/acerca',
-                      ),
-                      _buildCard(
-                        context,
-                        Icons.arrow_forward_ios,
-                        'Continuar',
-                        'Sigue explorando el contenido.',
-                        lilaSuave,
-                        '/siguiente',
-                      ),
-                    ],
+                  _buildCard(
+                    icon: Icons.settings,
+                    color: const Color(0xFFBA68C8),
+                    title: 'Configuración',
+                    onTap: () => Navigator.pushNamed(context, '/configuracion'),
                   ),
                 ],
               ),
-            ),
-            const SizedBox(height: 50),
 
-            // 🌈 Botones principales
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Builder(
-                  builder: (context) => ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: rosaSuave,
-                      foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 22, vertical: 14),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      elevation: 5,
-                    ),
-                    onPressed: () => Scaffold.of(context).openDrawer(),
-                    icon: const Icon(Icons.menu),
-                    label: const Text('Ver Menú'),
-                  ),
-                ),
-                const SizedBox(width: 20),
-                ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: rosaIntenso,
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 22, vertical: 14),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    elevation: 5,
-                  ),
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/perfil');
-                  },
-                  icon: const Icon(Icons.person),
-                  label: const Text('Ir al Perfil'),
-                ),
-              ],
-            ),
+              const SizedBox(height: 40),
 
-            const SizedBox(height: 50),
-
-            // 🪷 Pie de página
-            Container(
-              padding: const EdgeInsets.only(bottom: 30),
-              child: const Text(
-                '© 2025 Desarrollado con 💻 y ☕ por Camila Vivas',
+              // 💬 Pie de página
+              const Text(
+                'Desarrollado con 💻 y 💕 por Camila Vivas',
                 style: TextStyle(
                   color: Colors.grey,
-                  fontSize: 13,
                   fontStyle: FontStyle.italic,
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 
-  // 🧩 Tarjetas con estilo pastel
-  Widget _buildCard(BuildContext context, IconData icon, String title,
-      String description, Color color, String route) {
+  Widget _buildCard({
+    required IconData icon,
+    required Color color,
+    required String title,
+    required VoidCallback onTap,
+  }) {
     return GestureDetector(
-      onTap: () => Navigator.pushNamed(context, route),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 250),
-        width: 150,
-        height: 150,
+      onTap: onTap,
+      child: Container(
+        width: 140,
+        height: 120,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: color.withOpacity(0.15),
           borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: color.withOpacity(0.25),
-              blurRadius: 8,
-              offset: const Offset(0, 4),
-            ),
-          ],
+          border: Border.all(color: color.withOpacity(0.3)),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CircleAvatar(
-              backgroundColor: color,
-              radius: 28,
-              child: Icon(icon, color: Colors.white, size: 28),
-            ),
+            Icon(icon, color: color, size: 40),
             const SizedBox(height: 10),
             Text(
               title,
-              style: const TextStyle(
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: color,
                 fontWeight: FontWeight.bold,
-                color: Colors.black87,
-              ),
-            ),
-            const SizedBox(height: 4),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Text(
-                description,
-                style: const TextStyle(
-                  fontSize: 12,
-                  color: Colors.black54,
-                ),
-                textAlign: TextAlign.center,
               ),
             ),
           ],

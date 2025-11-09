@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:menudrawer/src/inicio.dart';
-import 'package:menudrawer/src/notificacion.dart';
-import 'package:menudrawer/src/perfil.dart';
-import 'package:menudrawer/src/siguiente.dart';
+import 'package:menudrawer/src/citas.dart';
+import 'package:menudrawer/src/pacientes.dart';
+import 'package:menudrawer/src/perfil_medico.dart';
+import 'package:menudrawer/src/configuracion.dart';
+import 'package:menudrawer/src/acerca.dart';
 
 class Navbar extends StatelessWidget {
   const Navbar({super.key});
@@ -13,7 +15,7 @@ class Navbar extends StatelessWidget {
       child: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFFF8BBD0), Color(0xFFFCE4EC)], // degradado rosa pastel
+            colors: [Color(0xFFF8BBD0), Color(0xFFFCE4EC)], // 💗 degradado rosa pastel
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -23,7 +25,7 @@ class Navbar extends StatelessWidget {
           children: [
             UserAccountsDrawerHeader(
               accountName: const Text(
-                "Camila Vivas",
+                "Dra. Camila Vivas",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
@@ -31,7 +33,7 @@ class Navbar extends StatelessWidget {
                 ),
               ),
               accountEmail: const Text(
-                "clg.vivas@yavirac.edu.ec",
+                "camila.vivas@clinicavida.ec",
                 style: TextStyle(color: Colors.white70),
               ),
               currentAccountPicture: Container(
@@ -46,27 +48,20 @@ class Navbar extends StatelessWidget {
                   ],
                 ),
                 child: const CircleAvatar(
-                  backgroundImage: AssetImage(
-                      "/SRC/flutter/examples/CuartoA/menudrawer/images/mujer.jpg"),
+                  backgroundImage: AssetImage("images/mujer.jpg"),
                 ),
               ),
-              decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 122, 195, 238), // color base
-                image: const DecorationImage(
-                  image: AssetImage(
-                    "/SRC/flutter/examples/CuartoA/menudrawer/images/fondo.2.jpg",
-                  ),
+              decoration: const BoxDecoration(
+                color: Color(0xFF7AC3EE),
+                image: DecorationImage(
+                  image: AssetImage("images/fondo2.jpg"),
                   fit: BoxFit.cover,
-                  opacity: 5.10, // suaviza la imagen
-                ),
-                borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(0),
-                  bottomRight: Radius.circular(0),
+                  opacity: 0.8,
                 ),
               ),
             ),
 
-            // Opciones del Drawer
+            // 🏠 Menú principal
             _buildDrawerItem(
               icon: Icons.home,
               text: 'Inicio',
@@ -78,42 +73,71 @@ class Navbar extends StatelessWidget {
               },
             ),
             _buildDrawerItem(
+              icon: Icons.calendar_today,
+              text: 'Citas Médicas',
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const CitasPage()),
+                );
+              },
+            ),
+            _buildDrawerItem(
+              icon: Icons.people,
+              text: 'Pacientes',
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const PacientesPage()),
+                );
+              },
+            ),
+            _buildDrawerItem(
               icon: Icons.person,
-              text: 'Perfil',
+              text: 'Perfil Médico',
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const PerfilPage()),
+                  MaterialPageRoute(builder: (context) => const PerfilMedicoPage()),
                 );
               },
             ),
             _buildDrawerItem(
-              icon: Icons.notifications_active,
-              text: 'Notificaciones',
+              icon: Icons.settings,
+              text: 'Configuración',
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => const NotificacionPage(),
-                  ),
+                  MaterialPageRoute(builder: (context) => const ConfiguracionPage()),
                 );
               },
             ),
             _buildDrawerItem(
-              icon: Icons.arrow_forward,
-              text: 'Siguiente',
+              icon: Icons.info_outline,
+              text: 'Acerca de',
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const SiguientePage()),
+                  MaterialPageRoute(builder: (context) => const AcercaPage()),
                 );
               },
             ),
+
+            // 📱 Nuevo ítem de Recursos Móviles
+            _buildDrawerItem(
+              icon: Icons.qr_code,
+              text: 'Escanear QR Médico',
+              onTap: () {
+                Navigator.pushNamed(context, '/recursos');
+              },
+            ),
+
             const Divider(
               color: Colors.white70,
               indent: 20,
               endIndent: 20,
             ),
+
             _buildDrawerItem(
               icon: Icons.exit_to_app,
               text: 'Cerrar sesión',
@@ -139,7 +163,7 @@ class Navbar extends StatelessWidget {
     required IconData icon,
     required String text,
     required VoidCallback onTap,
-    Color color = const Color(0xFF6D4C41), // tono marrón rosado pastel
+    Color color = const Color(0xFF6D4C41),
   }) {
     return ListTile(
       leading: Icon(icon, color: color),

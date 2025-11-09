@@ -6,9 +6,9 @@ class AcercaPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFFF0F5), // fondo rosa pastel muy suave
+      backgroundColor: const Color(0xFFFFF5F7), // fondo rosado claro
       appBar: AppBar(
-        title: const Text('Acerca de la App'),
+        title: const Text('Acerca de mi Agenda Médica'),
         backgroundColor: const Color(0xFFFFA07A), // durazno pastel
         elevation: 5,
         shape: const RoundedRectangleBorder(
@@ -23,7 +23,7 @@ class AcercaPage extends StatelessWidget {
           children: [
             const SizedBox(height: 20),
 
-            // 🌟 Cabecera con gradiente durazno-rosa
+            // 🩺 Cabecera con gradiente durazno-rosa
             Container(
               decoration: BoxDecoration(
                 gradient: const LinearGradient(
@@ -43,10 +43,10 @@ class AcercaPage extends StatelessWidget {
               padding: const EdgeInsets.all(25),
               child: Column(
                 children: const [
-                  Icon(Icons.info_outline, size: 80, color: Colors.white),
+                  Icon(Icons.medical_services_outlined, size: 80, color: Colors.white),
                   SizedBox(height: 15),
                   Text(
-                    'Agenda Personal',
+                    'Agenda Médica Digital',
                     style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.bold,
@@ -55,14 +55,14 @@ class AcercaPage extends StatelessWidget {
                   ),
                   SizedBox(height: 8),
                   Text(
-                    'Organiza, aprende y crece cada día',
+                    'Organiza tus citas, pacientes y registros clínicos',
                     style: TextStyle(color: Colors.white70, fontSize: 16),
+                    textAlign: TextAlign.center,
                   ),
                   SizedBox(height: 12),
                   Text(
-                    'Explora cada sección para gestionar tu información, recibir notificaciones '
-                    'y mejorar tus habilidades. ¡El límite lo pones tú!',
-                    style: TextStyle(color: Colors.white70, fontSize: 14),
+                    'Esta aplicación te permite administrar tus horarios, llevar el control de tus pacientes y mejorar tu gestión médica diaria con un estilo moderno y personalizado.',
+                    style: TextStyle(color: Colors.white70, fontSize: 14, height: 1.4),
                     textAlign: TextAlign.center,
                   ),
                 ],
@@ -71,7 +71,7 @@ class AcercaPage extends StatelessWidget {
 
             const SizedBox(height: 30),
 
-            // 💡 Mensaje motivador
+            // 💬 Sección de propósito
             Card(
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
               elevation: 6,
@@ -81,17 +81,16 @@ class AcercaPage extends StatelessWidget {
                 child: Column(
                   children: const [
                     Text(
-                      'Mensaje Inspirador',
+                      'Propósito de la App',
                       style: TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFFFF8C69), // durazno
+                        color: Color(0xFFFF8C69),
                       ),
                     ),
                     SizedBox(height: 12),
                     Text(
-                      'Cada pequeño paso cuenta. Mantente constante, explora nuevas ideas y aprovecha '
-                      'todas las herramientas a tu alcance. Cree en ti mismo y alcanza tus metas con determinación.',
+                      'La Agenda Médica ha sido diseñada para facilitar la organización de citas y mejorar la atención al paciente, brindando herramientas prácticas para profesionales de la salud.',
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 16, height: 1.5),
                     ),
@@ -102,7 +101,7 @@ class AcercaPage extends StatelessWidget {
 
             const SizedBox(height: 30),
 
-            // 👩‍💻 Información del desarrollador
+            // 👩‍⚕️ Información del desarrollador
             Card(
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
               elevation: 4,
@@ -123,7 +122,7 @@ class AcercaPage extends StatelessWidget {
                       const CircleAvatar(
                         radius: 45,
                         backgroundImage: AssetImage(
-                          '/SRC/flutter/examples/CuartoA/menudrawerCV/images/mujer.jpg',
+                          'images/mujer.jpg', // asegúrate que la ruta esté correcta
                         ),
                       ),
                       const SizedBox(height: 15),
@@ -145,9 +144,15 @@ class AcercaPage extends StatelessWidget {
                       ),
                       const SizedBox(height: 5),
                       const Text(
-                        'Estudiante de Desarrollo de Software en Yavirac',
+                        'Estudiante de Desarrollo de Software - Yavirac',
                         style: TextStyle(color: Colors.white70, fontSize: 14),
                         textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        'Versión 1.0.0',
+                        style: TextStyle(
+                            color: Colors.white.withOpacity(0.9), fontSize: 13),
                       ),
                     ],
                   ),
@@ -184,16 +189,19 @@ class AcercaPage extends StatelessWidget {
 
             const SizedBox(height: 40),
 
-            // 🔙 Botón de acción
+            // 🔙 Botón volver
             ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFFFFA07A),
-                padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 14),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 28, vertical: 14),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12)),
                 elevation: 6,
               ),
               onPressed: () {
-                Navigator.pushNamedAndRemoveUntil(context, '/inicio', (route) => false);
+                Navigator.pushNamedAndRemoveUntil(
+                    context, '/inicio', (route) => false);
               },
               icon: const Icon(Icons.home),
               label: const Text(
